@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     AwesomeNotifications().createdStream.listen((receivedNotification) {
       String? createdSourceText = AwesomeAssertUtils.toSimpleEnumString(
           receivedNotification.createdSource);
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -40,6 +41,8 @@ class _HomePageState extends State<HomePage> {
     AwesomeNotifications().displayedStream.listen((receivedNotification) {
       String? createdSourceText = AwesomeAssertUtils.toSimpleEnumString(
           receivedNotification.createdSource);
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$createdSourceText notification displayed'),
@@ -50,6 +53,8 @@ class _HomePageState extends State<HomePage> {
     AwesomeNotifications().dismissedStream.listen((receivedAction) {
       String? dismissedSourceText = AwesomeAssertUtils.toSimpleEnumString(
           receivedAction.dismissedLifeCycle);
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Notification dismissed on $dismissedSourceText'),
@@ -111,12 +116,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: createBasicBigPictureNotification,
               ),
-              const ElevatedButton(
-                child: Text(
-                  'Timer Notification',
-                ),
-                onPressed: createTimerNotification,
-              ),
               ElevatedButton(
                 child: const Text(
                   'Call Notification',
@@ -145,7 +144,7 @@ class _HomePageState extends State<HomePage> {
               ),
               ElevatedButton(
                 child: const Text(
-                  'Inbox Notification',
+                  'Group chat Notification',
                 ),
                 onPressed: () async {
                   await showInboxNotification(10);
@@ -156,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                   'Grouped Notification',
                 ),
                 onPressed: () async {
-                  await showGroupedNotifications('grouped');
+                  await showGroupedNotifications('grouped', 'group_key');
                 },
               ),
               ElevatedButton(

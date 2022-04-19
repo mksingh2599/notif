@@ -126,14 +126,15 @@ Future<void> simulateSendResponseChatConversation({
   );
 }
 
-Future<void> createMessagingNotification(
-    {required String channelKey,
-    required String groupKey,
-    required String chatName,
-    required String username,
-    required String message,
-    String? largeIcon,
-    bool checkPermission = true}) async {
+Future<void> createMessagingNotification({
+  required String channelKey,
+  required String groupKey,
+  required String chatName,
+  required String username,
+  required String message,
+  String? largeIcon,
+  bool checkPermission = true,
+}) async {
   await AwesomeNotifications().createNotification(
     content: NotificationContent(
       id: Random().nextInt(AwesomeNotifications.maxID),
@@ -168,38 +169,37 @@ Future<void> showInboxNotification(int id) async {
       id: id,
       channelKey: "inbox",
       title: '5 New messages from Tf_09',
-      category: NotificationCategory.Email,
-      body: '<b>Join BGMI tournament</b> You just won our prize'
+      category: NotificationCategory.Message,
+      body: 'Join BGMI tournament\n You just won our prize'
           '\n'
-          '<b>Start BGMI tournament</b> Are you tired from false advertisements? '
+          'Start BGMI tournament\n Are you tired from false advertisements? '
           '\n'
-          '<b>Tournament is ready</b> Stop to ignore me!'
+          'Tournament is ready\n Stop to ignore me!'
           '\n'
-          '<b>READ MY MESSAGE</b> Stop to ignore me!'
+          'READ MY MESSAGE\n Stop to ignore me!'
           '\n'
-          '<b>READ MY MESSAGE</b> Stop to ignore me!'
+          'READ MY MESSAGE\n Stop to ignore me!'
           '\n'
-          '<b>READ MY MESSAGE</b> Stop to ignore me!'
+          'READ MY MESSAGE\n Stop to ignore me!'
           '\n'
-          '<b>READ MY MESSAGE</b> Stop to ignore me!'
+          'READ MY MESSAGE\n Stop to ignore me!'
           '\n'
-          '<b>READ MY MESSAGE</b> Stop to ignore me!'
+          'READ MY MESSAGE\n Stop to ignore me!'
           '\n'
-          '<b>READ MY MESSAGE</b> Stop to ignore me!'
+          'READ MY MESSAGE\n Stop to ignore me!'
           '\n'
-          '<b>READ MY MESSAGE</b> Stop to ignore me!'
+          'READ MY MESSAGE\n Stop to ignore me!'
           '\n'
-          '<b>READ MY MESSAGE</b> Stop to ignore me!'
+          'READ MY MESSAGE\n Stop to ignore me!'
           '\n'
-          '<b>Winner</b> Stop to ignore me!'
+          'Winner\n Stop to ignore me!'
           '\n'
-          '<b>Winner</b> Stop to ignore me!'
+          'Winner\n Stop to ignore me!'
           '\n'
-          '<b>Tournament Ends</b> Stop to ignore me!',
-      summary: 'E-mail inbox',
+          'Tournament Ends\n Stop to ignore me!',
+      summary: 'Text messages',
       largeIcon: 'https://picsum.photos/200',
-      notificationLayout: NotificationLayout.Inbox,
-      payload: {'uuid': 'uuid-test'},
+      notificationLayout: NotificationLayout.MessagingGroup,
     ),
     actionButtons: [
       NotificationActionButton(
@@ -218,68 +218,166 @@ Future<void> showInboxNotification(int id) async {
   );
 }
 
-Future<void> showGroupedNotifications(String channelKey) async {
+Future<void> showGroupedNotifications(
+    String channelKey, String groupKey) async {
   await AwesomeNotifications().createNotification(
-      content: NotificationContent(
-          id: 1,
-          channelKey: channelKey,
-          title: 'Little Jhonny',
-          body: 'Hey dude! Look what i found!'));
-
-  sleep(const Duration(seconds: 2));
-
-  await AwesomeNotifications().createNotification(
-      content: NotificationContent(
-          id: 2, channelKey: 'grouped', title: 'Cyclano', body: 'What?'));
-
-  sleep(const Duration(seconds: 2));
-
-  await AwesomeNotifications().createNotification(
-      content: NotificationContent(
-          id: 3,
-          channelKey: channelKey,
-          title: 'Little Jhonny',
-          body: 'This push notifications plugin is amazing!'));
-
-  sleep(const Duration(seconds: 2));
-
-  await AwesomeNotifications().createNotification(
-      content: NotificationContent(
-          id: 4,
-          channelKey: channelKey,
-          title: 'Little Jhonny',
-          body: 'Its perfect!'));
+    content: NotificationContent(
+      id: 1,
+      channelKey: channelKey,
+      groupKey: groupKey,
+      notificationLayout: NotificationLayout.Messaging,
+      category: NotificationCategory.Message,
+      summary: 'Text messages',
+      title: 'Little Jhonny',
+      body: 'Hey dude! Look what i found!',
+    ),
+    actionButtons: [
+      NotificationActionButton(
+        key: 'REPLY',
+        label: 'Reply',
+        buttonType: ActionButtonType.InputField,
+        autoDismissible: true,
+      ),
+      NotificationActionButton(
+        key: 'READ',
+        label: 'Mark as Read',
+        autoDismissible: true,
+      )
+    ],
+  );
 
   sleep(const Duration(seconds: 2));
 
   await AwesomeNotifications().createNotification(
     content: NotificationContent(
-        id: 5,
-        channelKey: channelKey,
-        title: 'Little Jhonny',
-        body: 'I gonna contribute with the project! For sure!'),
+      id: 2,
+      channelKey: channelKey,
+      groupKey: groupKey,
+      notificationLayout: NotificationLayout.Messaging,
+      category: NotificationCategory.Message,
+      summary: 'Text messages',
+      title: 'Cyclano',
+      body: 'What?',
+    ),
+    actionButtons: [
+      NotificationActionButton(
+        key: 'REPLY',
+        label: 'Reply',
+        buttonType: ActionButtonType.InputField,
+        autoDismissible: true,
+      ),
+      NotificationActionButton(
+        key: 'READ',
+        label: 'Mark as Read',
+        autoDismissible: true,
+      )
+    ],
   );
+
+  sleep(const Duration(seconds: 2));
+
+  await AwesomeNotifications().createNotification(
+    content: NotificationContent(
+      id: 3,
+      channelKey: channelKey,
+      groupKey: groupKey,
+      notificationLayout: NotificationLayout.Messaging,
+      category: NotificationCategory.Message,
+      summary: 'Text messages',
+      title: 'Little Jhonny',
+      body: 'This push notifications plugin is amazing!',
+    ),
+    actionButtons: [
+      NotificationActionButton(
+        key: 'REPLY',
+        label: 'Reply',
+        buttonType: ActionButtonType.InputField,
+        autoDismissible: true,
+      ),
+      NotificationActionButton(
+        key: 'READ',
+        label: 'Mark as Read',
+        autoDismissible: true,
+      )
+    ],
+  );
+
+  sleep(const Duration(seconds: 2));
+
+  await AwesomeNotifications().createNotification(
+    content: NotificationContent(
+      id: 4,
+      channelKey: channelKey,
+      groupKey: groupKey,
+      notificationLayout: NotificationLayout.Messaging,
+      category: NotificationCategory.Message,
+      summary: 'Text messages',
+      title: 'Little Jhonny',
+      body: 'Its perfect!',
+    ),
+    actionButtons: [
+      NotificationActionButton(
+        key: 'REPLY',
+        label: 'Reply',
+        buttonType: ActionButtonType.InputField,
+        autoDismissible: true,
+      ),
+      NotificationActionButton(
+        key: 'READ',
+        label: 'Mark as Read',
+        autoDismissible: true,
+      )
+    ],
+  );
+
+  sleep(const Duration(seconds: 2));
+
+  await AwesomeNotifications().createNotification(
+    content: NotificationContent(
+      id: 5,
+      channelKey: channelKey,
+      groupKey: groupKey,
+      notificationLayout: NotificationLayout.Messaging,
+      category: NotificationCategory.Message,
+      summary: 'Text messages',
+      title: 'Little Jhonny',
+      body: 'I gonna contribute with the project! For sure!',
+    ),
+    actionButtons: [
+      NotificationActionButton(
+        key: 'REPLY',
+        label: 'Reply',
+        buttonType: ActionButtonType.InputField,
+        autoDismissible: true,
+      ),
+      NotificationActionButton(
+        key: 'READ',
+        label: 'Mark as Read',
+        autoDismissible: true,
+      )
+    ],
+  );
+
+  sleep(const Duration(seconds: 2));
 }
 
 Future<void> showProgressNotification(int id) async {
-  var maxStep = 10;
-  for (var simulatedStep = 1; simulatedStep <= maxStep + 1; simulatedStep++) {
+  var totalTime = 10;
+  for (var currentTime = 1; currentTime <= totalTime + 1; currentTime++) {
     await Future.delayed(
       const Duration(seconds: 1),
       () async {
-        if (simulatedStep > maxStep) {
+        if (currentTime > totalTime) {
           await AwesomeNotifications().createNotification(
             content: NotificationContent(
               id: id,
               channelKey: 'progress_bar',
-              title: 'Download finished',
-              body: 'filename.txt',
+              title: 'Tournament Started',
               category: NotificationCategory.Progress,
-              payload: {
-                'file': 'filename.txt',
-              },
+              notificationLayout: NotificationLayout.BigPicture,
               locked: false,
               icon: 'resource://drawable/logo',
+              bigPicture: 'asset://assets/notif.jpg',
             ),
           );
         } else {
@@ -287,17 +385,13 @@ Future<void> showProgressNotification(int id) async {
             content: NotificationContent(
               id: id,
               channelKey: 'progress_bar',
-              title:
-                  'Downloading fake file in progress ($simulatedStep of $maxStep)',
-              body: 'filename.txt',
+              title: 'Tournaments starts in ${totalTime - currentTime} seconds',
               category: NotificationCategory.Progress,
-              payload: {
-                'file': 'filename.txt',
-              },
-              notificationLayout: NotificationLayout.ProgressBar,
-              progress: min((simulatedStep / maxStep * 100).round(), 100),
+              notificationLayout: NotificationLayout.BigPicture,
+              progress: min((currentTime / totalTime * 100).round(), 100),
               locked: true,
               icon: 'resource://drawable/logo',
+              bigPicture: 'asset://assets/notif.jpg',
             ),
           );
         }
